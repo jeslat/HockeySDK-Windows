@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>HockeySDK.WP</id>
-    <version>2.2.2</version>
+    <id>HockeySDK.WP.Custom</id>
+    <version>2.2.3</version>
     <authors>Bit Stadium GmbH</authors>
   <owners>Bit Stadium GmbH</owners>
     <licenseUrl>https://github.com/bitstadium/HockeySDK-Windows/LICENSE.txt</licenseUrl>
