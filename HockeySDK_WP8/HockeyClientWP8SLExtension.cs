@@ -179,33 +179,6 @@ namespace HockeyApp
 
         #endregion
 
-        #region Feedback
-
-        /// <summary>
-        /// Shows the feedback UI.
-        /// </summary>
-        /// <param name="this">The this.</param>
-        /// <param name="navigationService">NavigationService</param>
-        [Obsolete("Use ShowFeedback() instead")]
-        public static void ShowFeedbackUI(this IHockeyClient @this, NavigationService navigationService)
-        {
-            @this.AsInternal().CheckForInitialization();
-            FeedbackManager.Instance.NavigateToFeedbackUI(navigationService);
-        }
-
-        /// <summary>
-        /// Open the feedback UI
-        /// </summary>
-        /// <param name="this"></param>
-        public static void ShowFeedback(this IHockeyClient @this)
-        {
-            @this.AsInternal().CheckForInitialization();
-            FeedbackManager.Instance.NavigateToFeedbackUI();
-        }
-
-        #endregion
-
-
         #endregion
     }
 }

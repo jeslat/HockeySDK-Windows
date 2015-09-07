@@ -105,7 +105,6 @@
     <Compile Include="Controls\NotificationBox\NotificationBox.cs" />
     <Compile Include="Controls\NotificationBox\NotificationBoxItem.cs" />
     <Compile Include="CrashHandler.cs" />
-    <Compile Include="FeedbackManager.cs" />
     <Compile Include="HockeyClientWP8SLExtension.cs" />
     <Compile Include="HockeyPlatformHelperWP8SL.cs" />
     <Compile Include="LocalizedStrings.cs" />
@@ -127,7 +126,6 @@
     <Compile Include="Tools\UpdatePopupTool.cs" />
     <Compile Include="Tools\UtilExtensions.cs" />
     <Compile Include="Tools\WebBrowserHelper.cs" />
-    <Compile Include="UpdateManager.cs" />
     <Compile Include="_NamespaceDoc.cs" />
   </ItemGroup>
   <ItemGroup>
