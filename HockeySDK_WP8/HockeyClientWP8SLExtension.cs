@@ -1,13 +1,9 @@
 ﻿using HockeyApp.Internal;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Resources;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Navigation;
 
 namespace HockeyApp
 {
@@ -120,62 +116,6 @@ namespace HockeyApp
             return @this;
         }
 
-
-        #endregion
-
-        #region Authentication
-
-        /// <summary>
-        /// Authorizes user with hockeyapp auth. Opening a login page to require (hockeaypp) userid and pass from user if needed
-        /// </summary>
-        /// <param name="this"></param>
-        /// <param name="successRedirect">Page-URI to redirect to after successful login</param>
-        /// <param name="navigationService">[optional] obsolete - not needed</param>
-        /// <param name="eMail">[Optional] initial email</param>
-        /// <param name="tokenValidationPolicy"><see cref="TokenValidationPolicy"/></param>
-        /// <param name="authValidationMode"><see cref="AuthValidationMode"/></param>
-        public static void AuthorizeUser(this IHockeyClient @this, 
-            Uri successRedirect, NavigationService navigationService = null,
-            string eMail = null,
-            TokenValidationPolicy tokenValidationPolicy = TokenValidationPolicy.EveryLogin,
-            AuthValidationMode authValidationMode = AuthValidationMode.Graceful)
-
-        {
-            @this.AsInternal().CheckForInitialization();
-            AuthManager.Instance.AuthenticateUser(successRedirect, AuthenticationMode.Authorize, 
-                tokenValidationPolicy, authValidationMode, eMail, null);
-        }
-
-        /// <summary>
-        /// Identify user with hockeaypp auth. Opening a login page to require valid email address for app if needed
-        /// </summary>
-        /// <param name="this"></param>
-        /// <param name="appSecret">Your app's app secret (see HockeyApp app page)</param>
-        /// <param name="successRedirect">Page-URI to redirect to after successful login</param>
-        /// <param name="navigationService">[optional] obsolete - not needed</param>
-        /// <param name="eMail">[Optional] initial email</param>
-        /// <param name="tokenValidationPolicy"><see cref="TokenValidationPolicy"/></param>
-        /// <param name="authValidationMode"><see cref="AuthValidationMode"/></param>
-        public static void IdentifyUser(this IHockeyClient @this, string appSecret,
-            Uri successRedirect, NavigationService navigationService = null,
-            string eMail = null,
-            TokenValidationPolicy tokenValidationPolicy = TokenValidationPolicy.EveryLogin,
-            AuthValidationMode authValidationMode = AuthValidationMode.Graceful)
-
-        {
-            @this.AsInternal().CheckForInitialization();
-            AuthManager.Instance.AuthenticateUser(successRedirect, AuthenticationMode.Identify, 
-                tokenValidationPolicy, authValidationMode, eMail, appSecret);
-        }
-
-        /// <summary>
-        /// Logout the user by forgetting validation token
-        /// </summary>
-        /// <param name="this">The this.</param>
-        public static void LogoutUser(this IHockeyClient @this)
-        {
-            AuthManager.Instance.RemoveUserToken();
-        }
 
         #endregion
 

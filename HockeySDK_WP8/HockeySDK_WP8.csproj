@@ -117,16 +117,9 @@
     <Compile Include="ToolStack\ToolStackCRCLib.cs" />
     <Compile Include="ToolStack\ToolStackPNGWriterLib.cs" />
     <Compile Include="ToolStack\ToolStackPNGWriterWBext.cs" />
-    <Compile Include="Tools\BooleanToVisibilityConverter.cs" />
     <Compile Include="Tools\DelegateCommand.cs" />
     <Compile Include="Tools\UtilExtensions.cs" />
     <Compile Include="_NamespaceDoc.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Themes\Generic.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\wp8releasenotes.css" />
