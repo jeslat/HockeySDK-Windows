@@ -209,10 +209,6 @@ namespace HockeyApp
                             {
                                 var __ = SendCrashesAsync(store, filenames);
                             }
-                            else
-                            {
-                                ShowNotificationToSend(store, filenames);
-                            }
                         }
                     }
                 }
@@ -277,10 +273,6 @@ namespace HockeyApp
                                 await SendCrashesAsync(store, filenames);
                                 return true;
                             }
-                            else
-                            {
-                                return await ShowNotificationToSend(store, filenames);
-                            }
                         }
                     }
                 }
@@ -290,39 +282,6 @@ namespace HockeyApp
                 }
             }
             return false;
-        }
-
-        private Task<bool> ShowNotificationToSend(IsolatedStorageFile store, string[] filenames)
-        {
-            var tcs = new TaskCompletionSource<bool>();
-            Scheduler.Dispatcher.Schedule(() =>
-            {
-                NotificationTool.Show(
-                    LocalizedStrings.LocalizedResources.CrashData,
-                    LocalizedStrings.LocalizedResources.SendCrashQuestion,
-                    new NotificationAction(LocalizedStrings.LocalizedResources.Send, (Action)(async () =>
-                    {
-                        tcs.TrySetResult(true);
-                        await SendCrashesAsync(store, filenames);
-                    })),
-                    new NotificationAction(LocalizedStrings.LocalizedResources.Delete, (Action) (() =>
-                    {
-                        tcs.TrySetResult(false);
-                        foreach (string filename in filenames)
-                        {
-                            try
-                            {
-                                store.DeleteFile(Path.Combine(Constants.CrashDirectoryName, filename));
-                            }
-                            catch (Exception e)
-                            {
-                                HockeyClient.Current.AsInternal().HandleInternalUnhandledException(e);
-                            }
-                        }
-                    }))
-                );
-            });
-            return tcs.Task;
         }
 
         private async Task SendCrashesAsync(IsolatedStorageFile store, string[] filenames)

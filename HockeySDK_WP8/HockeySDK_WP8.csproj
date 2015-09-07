@@ -102,8 +102,6 @@
     <Compile Include="AsyncSynchronizationContext.cs" />
     <Compile Include="AuthManager.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="Controls\NotificationBox\NotificationBox.cs" />
-    <Compile Include="Controls\NotificationBox\NotificationBoxItem.cs" />
     <Compile Include="CrashHandler.cs" />
     <Compile Include="HockeyClientWP8SLExtension.cs" />
     <Compile Include="HockeyPlatformHelperWP8SL.cs" />
@@ -121,11 +119,7 @@
     <Compile Include="ToolStack\ToolStackPNGWriterWBext.cs" />
     <Compile Include="Tools\BooleanToVisibilityConverter.cs" />
     <Compile Include="Tools\DelegateCommand.cs" />
-    <Compile Include="Tools\NotificationAction.cs" />
-    <Compile Include="Tools\NotificationTool.cs" />
-    <Compile Include="Tools\UpdatePopupTool.cs" />
     <Compile Include="Tools\UtilExtensions.cs" />
-    <Compile Include="Tools\WebBrowserHelper.cs" />
     <Compile Include="_NamespaceDoc.cs" />
   </ItemGroup>
   <ItemGroup>
