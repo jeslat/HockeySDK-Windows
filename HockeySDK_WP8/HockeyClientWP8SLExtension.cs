@@ -205,20 +205,6 @@ namespace HockeyApp
 
         #endregion
 
-        #region Updates
-
-        /// <summary>
-        /// Check for available updates
-        /// </summary>
-        /// <param name="this"></param>
-        /// <param name="settings"><see cref="UpdateCheckSettings"/></param>
-        public static void CheckForUpdates(this IHockeyClient @this, UpdateCheckSettings settings = null)
-        {
-            @this.AsInternal().CheckForInitialization();
-            UpdateManager.Instance.RunUpdateCheck(settings);
-        }
-
-        #endregion
 
         #endregion
     }

@@ -14,9 +14,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuget", "Nuget", "{358E4146
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{AEA0F647-4682-43A0-A8D9-C51F03AD04AC}"
-	ProjectSection(SolutionItems) = preProject
-		Nuget\tools\install.ps1 = Nuget\tools\install.ps1
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{2C4096E0-88BE-4471-AC95-27CE94AD7CF9}"
 EndProject

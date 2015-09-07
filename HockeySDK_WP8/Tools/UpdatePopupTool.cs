@@ -2,9 +2,6 @@
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Threading;
-using System.Linq;
-using HockeyApp.Views;
-using System.Collections.Generic;
 using Microsoft.Phone.Controls;
 using System.ComponentModel;
 
@@ -30,24 +27,6 @@ namespace HockeyApp.Tools
         #endregion
 
         #region Utilities
-
-        internal static void ShowPopup(Version currentVersion, IEnumerable<IAppVersion> appVersions, UpdateCheckSettings updateCheckSettings, Action<IAppVersion> updateAction)
-        {
-            if (IsShown)
-            {
-                ClosePopup();
-            }
-
-            Popup = new Popup
-            {
-                Child = CreateAppUpdateControl(currentVersion, appVersions, updateCheckSettings, updateAction)
-                /*,
-                Height =  Application.Current.Host.Content.ActualHeight,
-                Width =  Application.Current.Host.Content.ActualWidth*/
-            };
-
-            OpenPopup();
-        }
 
         internal static void Close()
         {
@@ -109,17 +88,6 @@ namespace HockeyApp.Tools
                 ClosePopup();
                 e.Cancel = true;
             }
-        }
-
-        private static AppUpdateControl CreateAppUpdateControl(Version currentVersion, IEnumerable<IAppVersion> appVersions, UpdateCheckSettings updateCheckSettings, Action<IAppVersion> updateAction)
-        {
-            var updateControl = new AppUpdateControl(appVersions, updateAction)
-            {
-                Height =  Application.Current.Host.Content.ActualHeight,
-                Width =  Application.Current.Host.Content.ActualWidth,
-            };
-
-            return updateControl;
         }
 
         private static DataTemplate TryFindTemplate(object templateKey)

@@ -1,21 +1,6 @@
-﻿using HockeyApp.Model;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Browser;
-using System.Net.NetworkInformation;
-using System.Text;
-using System.Threading.Tasks;
-using HockeyApp.Tools;
-using Microsoft.Phone.Reactive;
+﻿using System;
 using Windows.Phone.Management.Deployment;
 using System.Windows;
-using Windows.Management.Deployment;
-using System.Windows.Controls.Primitives;
-using System.Windows.Controls;
-using System.Windows.Media;
 using Microsoft.Phone.Tasks;
 
 namespace HockeyApp
@@ -108,99 +93,10 @@ namespace HockeyApp
             }
         }
 
-        /// <summary>
-        /// Check for an update on the server
-        /// HockecCient needs to be configured before calling this method (normally done by configuring a crahshandler in the App() constructor)
-        /// </summary>
-        /// <param name="settings">[optional] custom settings</param>
-        public void RunUpdateCheck(UpdateCheckSettings settings = null)
-        {
-            UpdateVersionIfAvailable(settings ?? UpdateCheckSettings.DefaultStartupSettings);
-        }
-
-        /// <summary>
-        /// Obsolete. Use UpdateManager.Instance.RunUpdateCheck()
-        /// </summary>
-        [Obsolete]
-        public static void RunUpdateCheck(string identifier, UpdateCheckSettings settings = null)
-        {
-            Instance.UpdateVersionIfAvailable(settings ?? UpdateCheckSettings.DefaultStartupSettings);
-        }
-
-        internal void UpdateVersionIfAvailable(UpdateCheckSettings updateCheckSettings)
-        {
-            //TODO manual mode and no network => show message
-            if (CheckWithUpdateFrequency(updateCheckSettings.UpdateCheckFrequency) && NetworkInterface.GetIsNetworkAvailable())
-            {
-                var task = HockeyClient.Current.AsInternal().GetAppVersionsAsync();
-                task.ContinueWith((finishedTask) =>
-                {
-                    if (finishedTask.Exception == null)
-                    {
-                        var appVersions = finishedTask.Result;
-                        var newestAvailableAppVersion = appVersions.FirstOrDefault();
-
-                        var currentVersion = new Version(ManifestHelper.GetAppVersion());
-                        if (appVersions.Any()
-                            && new Version(newestAvailableAppVersion.Version) > currentVersion
-                            && (updateCheckSettings.CustomDoShowUpdateFunc == null || updateCheckSettings.CustomDoShowUpdateFunc(newestAvailableAppVersion)))
-                        {
-                            if (updateCheckSettings.UpdateMode.Equals(UpdateMode.InApp) || (updateCheckSettings.EnforceUpdateIfMandatory && newestAvailableAppVersion.Mandatory))
-                            {
-                                ShowVersionPopup(currentVersion, appVersions, updateCheckSettings);
-                            }
-                            else
-                            {
-                                ShowUpdateNotification(currentVersion, appVersions, updateCheckSettings);
-                            }
-                        }
-                        else
-                        {
-                            if (updateCheckSettings.UpdateMode.Equals(UpdateMode.InApp))
-                            {
-                                Scheduler.Dispatcher.Schedule(() => MessageBox.Show(LocalizedStrings.LocalizedResources.NoUpdateAvailable));
-                            }
-                        }
-                    }
-                    else
-                    {
-                        HockeyClient.Current.AsInternal().HandleInternalUnhandledException(finishedTask.Exception);
-                    }
-                });
-            }
-        }
-
         internal bool CheckWithUpdateFrequency(UpdateCheckFrequency frequency)
         {
             //TODO implement. store and check last update timestamp...
             return true;
-        }
-
-        protected void ShowUpdateNotification(Version currentVersion, IEnumerable<IAppVersion> appVersions, UpdateCheckSettings updateCheckSettings)
-        {
-            Scheduler.Dispatcher.Schedule(() =>
-            {
-                NotificationTool.Show(
-                    LocalizedStrings.LocalizedResources.UpdateNotification,
-                    LocalizedStrings.LocalizedResources.UpdateAvailable,
-                    new NotificationAction(LocalizedStrings.LocalizedResources.Show, (Action) (() =>
-                    {
-                        ShowVersionPopup(currentVersion, appVersions, updateCheckSettings);
-                    })),
-                    new NotificationAction(LocalizedStrings.LocalizedResources.Dismiss, (Action) (() =>
-                    {
-                        //DO nothing
-                    }))
-                );
-            });
-        }
-
-        protected void ShowVersionPopup(Version currentVersion, IEnumerable<IAppVersion> appVersions, UpdateCheckSettings updateCheckSettings)
-        {
-            Scheduler.Dispatcher.Schedule(() =>
-            {
-                UpdatePopupTool.ShowPopup(currentVersion, appVersions, updateCheckSettings, DoUpdate);
-            });
         }
 
         internal async void DoUpdate(IAppVersion availableUpdate)
