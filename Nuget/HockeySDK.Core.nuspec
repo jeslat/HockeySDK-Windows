@@ -25,6 +25,7 @@
   </metadata>
 
   <files>
+    <file src="..\bin\portable\Release\HockeyAppPCL.*" target="lib\portable-net40+sl5" />
     <file src="..\bin\portable45\Release\HockeyAppPCL.*" target="lib\portable-net45+win8+wp8+wpa81+win81" />
   </files>
   

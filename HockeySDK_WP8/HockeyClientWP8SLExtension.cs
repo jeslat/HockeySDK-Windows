@@ -26,7 +26,7 @@ namespace HockeyApp
         /// <param name="appId"></param>
         /// <param name="rootFrame"></param>
         /// <returns></returns>
-        public static IHockeyClientConfigurable Configure(this IHockeyClient @this, string appId, Frame rootFrame = null)
+        public static IHockeyClientConfigurable Configure(this IHockeyClient @this, string appId, string test, Frame rootFrame = null)
         {
             @this.AsInternal().PlatformHelper = new HockeyPlatformHelperWP8SL();
             @this.AsInternal().AppIdentifier = appId;
